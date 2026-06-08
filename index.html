@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mila 🐾 · Una perrita llena de amor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────────────
+       VARIABLES & RESET
+    ───────────────────────────────────────────── */
+    :root {
+      --cream:       #FFFBF7;
+      --rose-pale:   #FDE8E4;
+      --rose:        #E8A598;
+      --rose-dark:   #C97B6E;
+      --caramel:     #C9896A;
+      --golden:      #D4A76A;
+      --beige:       #F5E6D3;
+      --brown:       #5C3D2E;
+      --brown-mid:   #8B6E5A;
+      --brown-light: #C4A882;
+      --white:       #FFFFFF;
+
+      --shadow-sm: 0 2px 14px rgba(92,61,46,.08);
+      --shadow-md: 0 8px 32px rgba(92,61,46,.13);
+      --shadow-lg: 0 20px 60px rgba(92,61,46,.16);
+
+      --r-sm:   12px;
+      --r-md:   20px;
+      --r-lg:   32px;
+      --r-full: 9999px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(255,251,247,.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(212,167,106,.18);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--brown);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--rose-dark); }
+
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      text-decoration: none;
+      color: var(--brown-mid);
+      font-weight: 700;
+      font-size: .875rem;
+      letter-spacing: .03em;
+      transition: color .25s;
+    }
+    nav ul a:hover { color: var(--rose-dark); }
+
+    .nav-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--brown);
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7rem 2rem 4rem;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--rose-pale) 55%, var(--beige) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative blobs */
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::before {
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(232,165,152,.35) 0%, transparent 70%);
+      top: -120px; right: -120px;
+    }
+    .hero::after {
+      width: 440px; height: 440px;
+      background: radial-gradient(circle, rgba(212,167,106,.28) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+    }
+
+    /* Scattered paw prints */
+    .paw-deco {
+      position: absolute;
+      font-size: 1.6rem;
+      opacity: .08;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* --- Text side --- */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--white);
+      border: 1px solid rgba(232,165,152,.45);
+      color: var(--rose-dark);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: .45rem 1.1rem;
+      border-radius: var(--r-full);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--brown);
+      margin-bottom: 1.1rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--rose-dark);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--brown-mid);
+      font-weight: 400;
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: linear-gradient(135deg, var(--rose-dark), var(--caramel));
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: .9rem 2.2rem;
+      border-radius: var(--r-full);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(201,123,110,.4);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .hero-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(201,123,110,.5);
+    }
+
+    /* --- Image side --- */
+    .hero-image { display: flex; justify-content: center; }
+
+    .hero-ring-wrap {
+      position: relative;
+      width: 390px;
+      height: 390px;
+    }
+
+    /* Outer dashed ring */
+    .hero-ring-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -28px;
+      border-radius: 50%;
+      border: 2px dashed rgba(232,165,152,.5);
+      animation: spin-ring 22s linear infinite;
+    }
+
+    /* Inner glow ring */
+    .hero-ring-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose-pale), var(--beige));
+    }
+
+    @keyframes spin-ring { to { transform: rotate(360deg); } }
+
+    .hero-photo,
+    .hero-photo-placeholder {
+      width: 390px;
+      height: 390px;
+      border-radius: 50%;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow-lg);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .hero-photo { object-fit: cover; display: block; }
+
+    .hero-photo-placeholder {
+      background: linear-gradient(145deg, #F9D5CC 0%, #F2BDB4 45%, #EDAA90 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 5.5rem;
+    }
+    .hero-photo-placeholder p {
+      font-size: .85rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.85);
+      margin-top: .4rem;
+      letter-spacing: .03em;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* Floating info chips */
+    .chip {
+      position: absolute;
+      background: var(--white);
+      border-radius: var(--r-md);
+      padding: .65rem 1.1rem;
+      box-shadow: var(--shadow-md);
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--brown);
+      z-index: 2;
+      white-space: nowrap;
+    }
+    .chip-left  { bottom: 36px; left: -28px; }
+    .chip-right { top:    32px; right: -20px; }
+
+    /* ─────────────────────────────────────────────
+       SHARED SECTION HELPERS
+    ───────────────────────────────────────────── */
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--rose-dark);
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: .6rem;
+    }
+
+    .divider {
+      width: 56px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rose-dark), var(--golden));
+      border-radius: var(--r-full);
+      margin-bottom: 3rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       INFO / FICHA
+    ───────────────────────────────────────────── */
+    .info-section { background: var(--beige); }
+
+    .info-header { text-align: center; }
+    .info-header .divider { margin: 0 auto 3rem; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .info-card {
+      background: var(--white);
+      border-radius: var(--r-md);
+      padding: 1.6rem 1.2rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s, transform .6s, box-shadow .35s;
+    }
+    .info-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .info-card:hover { box-shadow: var(--shadow-md); }
+
+    .info-icon {
+      font-size: 2.1rem;
+      margin-bottom: .7rem;
+      display: block;
+    }
+    .info-lbl {
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      margin-bottom: .35rem;
+    }
+    .info-val {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* ─────────────────────────────────────────────
+       ABOUT
+    ───────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    /* Image side */
+    .about-img-side { position: relative; }
+
+    .about-img-wrap {
+      width: 100%;
+      padding-bottom: 115%;
+      position: relative;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .about-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #F5D0C8 0%, #EDB89A 60%, #D4A76A 100%);
+      font-size: 4rem;
+    }
+    .about-photo-placeholder p {
+      font-size: .85rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.85);
+      margin-top: .5rem;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -22px;
+      right: -22px;
+      background: var(--white);
+      border-radius: var(--r-md);
+      padding: 1rem 1.4rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .about-badge .big { font-size: 2rem; display: block; line-height: 1; }
+    .about-badge small {
+      display: block;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+      margin-top: .3rem;
+    }
+
+    /* Text side */
+    .about-text p {
+      color: var(--brown-mid);
+      font-size: 1.05rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin-top: 2rem;
+    }
+    .tag {
+      background: var(--rose-pale);
+      color: var(--rose-dark);
+      border: 1px solid rgba(232,165,152,.4);
+      padding: .42rem 1rem;
+      border-radius: var(--r-full);
+      font-size: .875rem;
+      font-weight: 700;
+      transition: background .25s, transform .2s;
+    }
+    .tag:hover { background: var(--rose); color: var(--white); transform: translateY(-2px); }
+
+    /* ─────────────────────────────────────────────
+       GALLERY
+    ───────────────────────────────────────────── */
+    .gallery-section { background: var(--beige); }
+
+    .gallery-header { text-align: center; }
+    .gallery-header .divider { margin: 0 auto 3rem; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1.4rem;
+    }
+
+    .gallery-card {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      aspect-ratio: 4/5;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s, transform .6s, box-shadow .35s;
+    }
+    .gallery-card.visible { opacity: 1; transform: translateY(0); }
+
+    /* First card spans 2 rows for magazine layout */
+    .gallery-card:first-child {
+      grid-row: span 2;
+      aspect-ratio: unset;
+    }
+
+    .gallery-card:hover {
+      box-shadow: var(--shadow-lg);
+      z-index: 2;
+    }
+    .gallery-card:hover .gallery-thumb { transform: scale(1.05); }
+
+    .gallery-thumb {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform .5s ease;
+    }
+    /* Image when provided */
+    .gallery-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Color placeholders */
+    .ph-1 { background: linear-gradient(145deg, #F9D5CC, #F0B5AA); }
+    .ph-2 { background: linear-gradient(145deg, #F5E6D3, #EDD5B8); }
+    .ph-3 { background: linear-gradient(145deg, #EDE0F5, #D4B8E8); }
+    .ph-4 { background: linear-gradient(145deg, #D5E8F5, #B8D5EC); }
+    .ph-5 { background: linear-gradient(145deg, #D5F0E3, #B8E8CC); }
+    .ph-6 { background: linear-gradient(145deg, #F0EAD5, #E8D8B8); }
+
+    .ph-emoji { font-size: 3rem; }
+    .ph-label {
+      font-size: .75rem;
+      font-weight: 700;
+      color: rgba(92,61,46,.55);
+      margin-top: .5rem;
+    }
+
+    /* Hover overlay */
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(92,61,46,.62) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem 1.4rem;
+      opacity: 0;
+      transition: opacity .35s;
+    }
+    .gallery-card:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span {
+      color: var(--white);
+      font-weight: 700;
+      font-size: .875rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       LIGHTBOX
+    ───────────────────────────────────────────── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(30,15,8,.9);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: var(--white);
+      border: none;
+      border-radius: 50%;
+      width: 46px; height: 46px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: background .2s, transform .2s;
+    }
+    .lb-close:hover { background: var(--rose-pale); transform: scale(1.08); }
+
+    .lb-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      width: 320px; height: 320px;
+      border-radius: var(--r-lg);
+      background: linear-gradient(145deg, #F9D5CC, #EDB89A);
+    }
+    .lb-placeholder p {
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.85);
+      margin-top: .6rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      background: var(--brown);
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-paws {
+      font-size: 1.6rem;
+      letter-spacing: .4em;
+      opacity: .4;
+      margin-bottom: .8rem;
+    }
+
+    .footer-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--rose-pale);
+      margin-bottom: 1.2rem;
+    }
+
+    footer small {
+      font-size: .8rem;
+      color: rgba(255,251,247,.35);
+      letter-spacing: .04em;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+      .hero-image  { order: -1; }
+      .hero-subtitle { max-width: 100%; }
+      .hero-ring-wrap,
+      .hero-photo,
+      .hero-photo-placeholder { width: 300px; height: 300px; }
+      .chip { display: none; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-badge { right: 0; }
+
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-card:first-child { grid-row: span 1; aspect-ratio: 4/5; }
+    }
+
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .nav-menu-btn { display: block; }
+
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════
+       NAV
+  ════════════════════ -->
+  <nav>
+    <a href="#" class="nav-logo">Mila <span>🐾</span></a>
+    <ul>
+      <li><a href="#info">Datos</a></li>
+      <li><a href="#sobre">Sobre Mila</a></li>
+      <li><a href="#galeria">Galería</a></li>
+    </ul>
+    <button class="nav-menu-btn" aria-label="Menú">☰</button>
+  </nav>
+
+  <!-- ════════════════════
+       HERO
+  ════════════════════ -->
+  <section class="hero">
+    <!-- Decorative paws -->
+    <span class="paw-deco" style="top:12%;left:6%">🐾</span>
+    <span class="paw-deco" style="top:30%;left:90%">🐾</span>
+    <span class="paw-deco" style="top:72%;left:4%">🐾</span>
+    <span class="paw-deco" style="top:80%;left:88%">🐾</span>
+    <span class="paw-deco" style="top:55%;left:50%">🐾</span>
+
+    <div class="hero-inner">
+
+      <!-- Text -->
+      <div class="hero-text">
+        <div class="hero-badge">🐾 &nbsp; Conóceme</div>
+        <h1 class="hero-title">Hola,<br>soy <em>Mila</em></h1>
+        <p class="hero-subtitle">
+          Una perrita llena de amor, juegos y momentos felices.
+          ¡Bienvenidos a mi pequeño rincón del mundo!
+        </p>
+        <a href="#galeria" class="hero-cta">Ver galería &nbsp; ✨</a>
+      </div>
+
+      <!-- Image -->
+      <div class="hero-image">
+        <div class="hero-ring-wrap">
+          <img class="hero-photo" src="fotos/IMG-20260524-WA0001.jpg" alt="Mila">
+          <div class="chip chip-left">🐾 &nbsp; ¡Mucho amor!</div>
+          <div class="chip chip-right">💛 &nbsp; La más bonita</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════
+       FICHA / INFO
+  ════════════════════ -->
+  <section class="section info-section" id="info">
+    <div class="section-inner">
+
+      <div class="info-header">
+        <span class="section-label">Ficha personal</span>
+        <h2 class="section-title">Datos de Mila</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <span class="info-icon">🏷️</span>
+          <div class="info-lbl">Nombre</div>
+          <div class="info-val">Mila(nesa)</div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🐾</span>
+          <div class="info-lbl">Tipo</div>
+          <div class="info-val">Perrita</div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🎂</span>
+          <div class="info-lbl">Edad</div>
+          <!-- ✏️ Completar: cambiá "Completar" por la edad de Mila -->
+          <div class="info-val">1 año</div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🐕</span>
+          <div class="info-lbl">Raza</div>
+          <!-- ✏️ Completar: cambiá "Completar" por la raza de Mila -->
+          <div class="info-val">Completar</div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🎨</span>
+          <div class="info-lbl">Color</div>
+          <!-- ✏️ Completar: cambiá "Completar" por el color de Mila -->
+          <div class="info-val">Blanca con mascara</div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">💕</span>
+          <div class="info-lbl">Personalidad</div>
+          <div class="info-val">Dulce · Juguetona · Cariñosa · Curiosa</div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">⭐</span>
+          <div class="info-lbl">Le encanta</div>
+          <div class="info-val">Pasear · Dormir · Jugar · Mimos</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════
+       SOBRE MILA
+  ════════════════════ -->
+  <section class="section" id="sobre">
+    <div class="section-inner">
+      <div class="about-grid">
+
+        <!-- Image -->
+        <div class="about-img-side">
+          <div class="about-img-wrap">
+            <img class="about-photo" src="fotos/IMG-20260524-WA0001.jpg" alt="Mila">
+          </div>
+          <div class="about-badge">
+            <span class="big">🐾</span>
+            <small>Compañera fiel</small>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="about-text">
+          <span class="section-label">Nuestra historia</span>
+          <h2 class="section-title">Sobre Mila</h2>
+          <div class="divider"></div>
+          <p>
+            Mila es una perrita especial, compañera fiel y dueña de una personalidad única.
+            Le encanta estar cerca de su familia, jugar, descansar en sus lugares favoritos
+            y llenar cada día de alegría.
+          </p>
+          <p>
+            Con su mirada tierna y su energía contagiosa, Mila transforma los momentos simples
+            en recuerdos inolvidables. Cada paseo es una aventura, cada abrazo es su forma de
+            decir cuánto amor tiene para dar.
+          </p>
+          <p>
+            Desde que llegó a casa, trajo consigo algo muy especial: esa sensación de que
+            todo está bien cuando ella está cerca.
+          </p>
+          <div class="about-tags">
+            <span class="tag">🌿 Pasear</span>
+            <span class="tag">😴 Dormir</span>
+            <span class="tag">🎾 Jugar</span>
+            <span class="tag">🤗 Mimos</span>
+            <span class="tag">💛 Amor</span>
+            <span class="tag">🌟 Alegría</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════
+       GALERÍA
+  ════════════════════ -->
+  <section class="section gallery-section" id="galeria">
+    <div class="section-inner">
+
+      <div class="gallery-header">
+        <span class="section-label">Sus mejores momentos</span>
+        <h2 class="section-title">Galería de Mila</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="gallery-grid">
+
+        <div class="gallery-card" data-index="0">
+          <div class="gallery-thumb"><img src="fotos/IMG-20260411-WA0003.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+        <div class="gallery-card" data-index="1">
+          <div class="gallery-thumb"><img src="fotos/20260512_200650.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+        <div class="gallery-card" data-index="2">
+          <div class="gallery-thumb"><img src="fotos/IMG-20260416-WA0000.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+        <div class="gallery-card" data-index="3">
+          <div class="gallery-thumb"><img src="fotos/20260531_224124.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+        <div class="gallery-card" data-index="4">
+          <div class="gallery-thumb"><img src="fotos/IMG-20260524-WA0007.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+        <div class="gallery-card" data-index="5">
+          <div class="gallery-thumb"><img src="fotos/IMG-20260128-WA0000.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+        <div class="gallery-card" data-index="6">
+          <div class="gallery-thumb"><img src="fotos/IMG-20260406-WA0001.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+        <div class="gallery-card" data-index="7">
+          <div class="gallery-thumb"><img src="fotos/IMG-20260411-WA0005.jpg" alt="Mila"></div>
+          <div class="gallery-overlay"><span>Ver foto ✨</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════
+       LIGHTBOX
+  ════════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto de Mila">
+    <button class="lb-close" id="lb-close" aria-label="Cerrar">✕</button>
+    <div id="lb-content"></div>
+  </div>
+
+  <!-- ════════════════════
+       FOOTER
+  ════════════════════ -->
+  <footer>
+    <div class="footer-paws">🐾 🐾 🐾</div>
+    <p class="footer-quote">"Con amor, para Mila 🐾"</p>
+    <br>
+    <small>Hecha con mucho cariño ❤️ &nbsp;·&nbsp; Mila-Site</small>
+  </footer>
+
+  <!-- ════════════════════
+       JAVASCRIPT
+  ════════════════════ -->
+  <script>
+    /* ── Intersection Observer: reveal on scroll ── */
+    const revealItems = document.querySelectorAll('.info-card, .gallery-card');
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger each card slightly
+          const idx = Array.from(revealItems).indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('visible'), idx * 80);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(el => io.observe(el));
+
+    /* ── Lightbox ── */
+    const lightbox  = document.getElementById('lightbox');
+    const lbContent = document.getElementById('lb-content');
+
+    document.querySelectorAll('.gallery-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        lbContent.innerHTML = '';
+
+        if (img) {
+          const clone = document.createElement('img');
+          clone.src = img.src;
+          clone.alt = img.alt || 'Mila';
+          lbContent.appendChild(clone);
+        } else {
+          // Placeholder view
+          const ph = document.createElement('div');
+          ph.className = 'lb-placeholder';
+          const emojiEl = card.querySelector('.ph-emoji');
+          ph.innerHTML = (emojiEl ? emojiEl.textContent : '🐾') + '<p>Foto de Mila próximamente</p>';
+          lbContent.appendChild(ph);
+        }
+
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    /* ── Nav active link highlight on scroll ── */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul a');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => {
+            a.style.color = a.getAttribute('href') === '#' + entry.target.id
+              ? 'var(--rose-dark)'
+              : '';
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => navObserver.observe(s));
+  </script>
+
+</body>
+</html>
