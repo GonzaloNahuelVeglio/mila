@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(anthropic-skills:pdf)",
+      "Skill(anthropic-skills:pdf:*)",
+      "Bash(pip show *)",
+      "Bash(pip install *)",
+      "Bash(python extract_relations.py)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}
